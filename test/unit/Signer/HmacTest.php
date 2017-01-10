@@ -41,13 +41,13 @@ class HmacTest extends \PHPUnit_Framework_TestCase
      *
      * @uses \Lcobucci\JWT\Signer\Key
      *
-     * @covers \Lcobucci\JWT\Signer\Hmac::sign
+     * @covers \Lcobucci\JWT\Signer\Hmac::createHash
      */
-    public function signMustReturnAHashAccordingWithTheAlgorithm(): string
+    public function createHashMustReturnAHashAccordingWithTheAlgorithm(): string
     {
         $hash = hash_hmac('sha256', 'test', '123', true);
 
-        self::assertEquals($hash, $this->signer->sign('test', new Key('123')));
+        self::assertEquals($hash, $this->signer->createHash('test', new Key('123')));
 
         return $hash;
     }
@@ -55,30 +55,30 @@ class HmacTest extends \PHPUnit_Framework_TestCase
     /**
      * @test
      *
-     * @depends signMustReturnAHashAccordingWithTheAlgorithm
+     * @depends createHashMustReturnAHashAccordingWithTheAlgorithm
      *
-     * @uses \Lcobucci\JWT\Signer\Hmac::sign
+     * @uses \Lcobucci\JWT\Signer\Hmac::createHash
      * @uses \Lcobucci\JWT\Signer\Key
      *
-     * @covers \Lcobucci\JWT\Signer\Hmac::verify
+     * @covers \Lcobucci\JWT\Signer\Hmac::doVerify
      */
-    public function verifyShouldReturnTrueWhenExpectedHashWasCreatedWithSameInformation(string $expected)
+    public function doVerifyShouldReturnTrueWhenExpectedHashWasCreatedWithSameInformation(string $expected)
     {
-        self::assertTrue($this->signer->verify($expected, 'test', new Key('123')));
+        self::assertTrue($this->signer->doVerify($expected, 'test', new Key('123')));
     }
 
     /**
      * @test
      *
-     * @depends signMustReturnAHashAccordingWithTheAlgorithm
+     * @depends createHashMustReturnAHashAccordingWithTheAlgorithm
      *
-     * @uses \Lcobucci\JWT\Signer\Hmac::sign
+     * @uses \Lcobucci\JWT\Signer\Hmac::createHash
      * @uses \Lcobucci\JWT\Signer\Key
      *
-     * @covers \Lcobucci\JWT\Signer\Hmac::verify
+     * @covers \Lcobucci\JWT\Signer\Hmac::doVerify
      */
-    public function verifyShouldReturnFalseWhenExpectedHashWasNotCreatedWithSameInformation($expected)
+    public function doVerifyShouldReturnFalseWhenExpectedHashWasNotCreatedWithSameInformation($expected)
     {
-        self::assertFalse($this->signer->verify($expected, 'test', new Key('1234')));
+        self::assertFalse($this->signer->doVerify($expected, 'test', new Key('1234')));
     }
 }

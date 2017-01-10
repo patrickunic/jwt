@@ -17,7 +17,7 @@ use Lcobucci\JWT\Signer\Rsa;
  * @author Luís Otávio Cobucci Oblonczyk <lcobucci@gmail.com>
  * @since 2.1.0
  */
-final class Sha512 extends Rsa
+class Sha512 extends Rsa
 {
     /**
      * {@inheritdoc}

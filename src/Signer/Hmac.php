@@ -9,20 +9,18 @@ declare(strict_types=1);
 
 namespace Lcobucci\JWT\Signer;
 
-use Lcobucci\JWT\Signer;
-
 /**
  * Base class for hmac signers
  *
  * @author Luís Otávio Cobucci Oblonczyk <lcobucci@gmail.com>
  * @since 0.1.0
  */
-abstract class Hmac implements Signer
+abstract class Hmac extends BaseSigner
 {
     /**
      * {@inheritdoc}
      */
-    public function sign(string $payload, Key $key): string
+    public function createHash(string $payload, Key $key): string
     {
         return hash_hmac($this->getAlgorithm(), $payload, $key->getContent(), true);
     }
@@ -30,9 +28,9 @@ abstract class Hmac implements Signer
     /**
      * {@inheritdoc}
      */
-    public function verify(string $expected, string $payload, Key $key): bool
+    public function doVerify(string $expected, string $payload, Key $key): bool
     {
-        return hash_equals($expected, $this->sign($payload, $key));
+        return hash_equals($expected, $this->createHash($payload, $key));
     }
 
     /**
