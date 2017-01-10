@@ -17,7 +17,7 @@ use Mdanter\Ecc\Crypto\Key\PublicKeyInterface;
  * @author Luís Otávio Cobucci Oblonczyk <lcobucci@gmail.com>
  * @since 2.1.0
  */
-final class EcdsaTest extends BaseTestCase
+class EcdsaTest extends BaseTestCase
 {
     /**
      * @return Ecdsa

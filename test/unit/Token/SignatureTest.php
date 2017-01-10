@@ -13,7 +13,7 @@ namespace Lcobucci\JWT\Token;
  * @author Luís Otávio Cobucci Oblonczyk <lcobucci@gmail.com>
  * @since 0.1.0
  */
-final class SignatureTest extends \PHPUnit_Framework_TestCase
+class SignatureTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @test
